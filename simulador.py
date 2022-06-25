@@ -105,15 +105,17 @@ def simulador():
 
     while continua == 'sim':
         print("Insira o módulo da força horizontal a ser adicionada: ")
-        modForcasX.append(int(input()))
+        moduloAtual = int(input())
 
         print("Insira a posição do ponto de aplicação da força a ser adicionada: ")
         posicaoAtual = int(input())
 
         if posicaoAtual > 0 or posicaoAtual < comprimento:
             print("Posição inválida. Uma força horizontal deve ser aplicada no começo ou no final da barra")
+            print("A força não foi adicionada.\n")
         else:
             posForcasX.append(posicaoAtual)
+            modForcasX.append(moduloAtual)
 
         print("Deseja aplicar mais forças na drieção vertical? (sim/nao)")
         continua = input()
@@ -130,19 +132,22 @@ def simulador():
 
     while continua == 'sim':
         print("Insira o módulo da força vertical a ser adicionada: ")
-        modForcasY.append(int(input()))
+        moduloAtual = int(input())
 
         print("Insira a posição horizontal do ponto de aplicação da força a ser adicionada: ")
         posicaoAtual = int(input())
 
         if posicaoAtual > comprimento:
             print("Posição inválida. Insira uma posição menor ou igual ao comprimento da barra.")
+            print("A força não foi adicionada.\n")
 
         elif posicaoAtual < 0:
             print("Posição inválida. Insira uma posição maior ou igual a zero.")
+            print("A força não foi adicionada.\n")
 
         else:
             posForcasY.append(posicaoAtual)
+            modForcasY.append(moduloAtual)
 
         print("Deseja aplicar mais forças na drieção vertical? (sim/nao)")
         continua = input()
