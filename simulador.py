@@ -1,3 +1,6 @@
+import numpy as np
+from trabalho import plot
+
 def simulador():
     modForcas = []
     modForcasX, modForcasY = [], []
@@ -10,6 +13,8 @@ def simulador():
 
     momentos = []
     reacoesEngastes, reacoesSimples, reacoesDuplos = [], [], []
+
+    zero = [0.0]
 
     # Configuração da barra
     print("Bem-vindo ao simulador de esforços!\nInsira o comprimento da sua barra (metros):")
@@ -98,9 +103,21 @@ def simulador():
         print("\n Não há apoios duplos no sistema.")
     print("-------------------------------------------------\n")
 
-    apoios.append(engastes)
-    apoios.append(simples)
-    apoios.append(duplos)
+    if(len(simples) != 0):
+        apoios.append(simples)
+    else:
+        apoios.append(zero)
+
+    if(len(duplos) != 0):
+        apoios.append(duplos)
+    else:
+        apoios.append(zero)
+
+    if(len(engastes) != 0):
+        apoios.append(engastes)
+    else:
+        apoios.append(zero)
+    
 
     # Configuração dos esforços
     print("Configuração dos esforços\nDeseja aplicar forças na direção horizontal (eixo x)?(sim/nao)")
@@ -177,6 +194,8 @@ def simulador():
     if (len(engastes) == 0 and  len(simples) == 1 and len(duplos) == 1):
         if (len(modForcasX) != 0):
             reacoesDuplos.append(-sum(modForcasX))
+        else:
+            reacoesDuplos.append(0.0)
         for i in range(len(modForcasY)):
             momentos.append(modForcasY[i] * (posForcasY[i] - simples[0]))
         reacoesDuplos.append(- sum(momentos) / (duplos[0] - simples[0]))
@@ -189,19 +208,85 @@ def simulador():
             momentos.append(modForcasY[i] * (posForcasY[i] - engastes[0]))
         if (len(modForcasX) != 0):
             reacoesEngastes.append(- sum(modForcasX))
+        else:
+            reacoesEngastes.append(0.0)
         reacoesEngastes.append(- sum(modForcasY))
         reacoesEngastes.append(- sum(momentos))
         print("reacoes engaste: " + str(reacoesEngastes))
     
-    matrizInicial(modForcasX, modForcasY, momentos, apois)
+    matrizForcas = matrizForcasPlot(modForcasX, modForcasY, momentos, apoios)
+    matrizPosicoes = matrizPosPlot(comprimento, posForcasX, posForcasY, momentos, apoios)
+
+    plot(comprimento, matrizForcas, matrizPosicoes)
+
+def matrizForcasPlot(forcasX, forcasY, momentos, apoios):
+
+    matrizForcas = []
+    if(len(forcasX) != 0):
+        fx = np.zeros((1, len(forcasX)))
+        for i in range(len(forcasX)):
+            fx[0][i] = forcasX[i]
+    else:
+        fx = np.zeros((1,1))
+
+    if(len(forcasY) != 0):
+        fy = np.zeros((1, len(forcasY)))
+        for i in range(len(forcasY)):
+            fy[0][i] = forcasY[i]
+    else:
+        fy = np.zeros((1, 1))
+
+    mom = np.zeros((1,1))
+    mom[0][0] = sum(momentos)
+
+    if(len(apoios) != 0):
+        apoio = np.zeros((1, len(apoios)))
+        for i in range(len(apoios)):
+            apoio[0][i] = apoios[i][0]
+    else:
+        apoio = np.zeros((1,1))
+        
+    matrizForcas.append(fx)
+    matrizForcas.append(fy)
+    matrizForcas.append(mom)
+    matrizForcas.append(apoio)
+
+    return matrizForcas
 
 
+def matrizPosPlot(barra, posicoesX, posicoesY, momentos, apoios):
 
-def matrizInicial(forcasX, forcasY, momentos, apoios):
-    fx = np.zeros(1, len(forcasX))
+    matrizPosicoes = []
+    if(len(posicoesX) != 0):
+        px = np.zeros((1, len(posicoesX)))
+        for i in range(len(posicoesX)):
+            px[0][i] = posicoesX[i]
+    else:
+        px = np.zeros((1,1))
 
-    print(fx)
+    if(len(posicoesY) != 0):
+        py = np.zeros((1, len(posicoesY)))
+        for i in range(len(posicoesY)):
+            py[0][i] = posicoesY[i]
+    else:
+        py = np.zeros((1, 1))
 
+    mom = np.zeros((1,1))
+    mom[0][0] = barra
+
+    if(len(apoios) != 0):
+        apoio = np.zeros((1, len(apoios)))
+        for i in range(len(apoios)):
+            apoio[0][i] = apoios[i][0]
+    else:
+        apoio = np.zeros((1,1))
+        
+    matrizPosicoes.append(px)
+    matrizPosicoes.append(py)
+    matrizPosicoes.append(mom)
+    matrizPosicoes.append(apoio)
+
+    return matrizPosicoes
 
 simulador()
 
