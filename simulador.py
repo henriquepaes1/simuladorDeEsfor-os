@@ -1,3 +1,4 @@
+import os
 import numpy as np
 from trabalho import plot
 
@@ -14,15 +15,15 @@ def simulador():
     momentos = []
     reacoesEngastes, reacoesSimples, reacoesDuplos = [], [], []
 
-    zero = [0.0]
+    zero = []
 
     # Configuração da barra
     print("Bem-vindo ao simulador de esforços!\nInsira o comprimento da sua barra (metros):")
-    comprimento = float(input())
+    comprimento = int(input())
 
     while(comprimento <= 0):
         print("O comprimento da barra deve ser maior que 0")
-        comprimento = float(input())
+        comprimento = int(input())
 
     print("\nComprimento de " + str(comprimento) + " metros configurado com sucesso!\n")
     print("-------------------------------------------------\n")
@@ -33,7 +34,7 @@ def simulador():
 
     while continua == 'sim':
         print("Insira posição horizontal do engaste: ")
-        posicaoAtual = float(input()) 
+        posicaoAtual = int(input()) 
 
         if posicaoAtual != 0 and posicaoAtual != comprimento:
             print("Posição inválida. Um engaste deve ser posicionado no início ou no final da barra.")
@@ -58,7 +59,7 @@ def simulador():
 
     while continua == 'sim':
         print("Insira posição horizontal do apoio simples: ")
-        posicaoAtual = float(input()) 
+        posicaoAtual = int(input()) 
 
         if posicaoAtual > comprimento:
             print("Posição inválida. Insira uma posição menor ou igual ao comprimento da barra.")
@@ -83,7 +84,7 @@ def simulador():
 
     while continua == 'sim':
         print("Insira posição horizontal do apoio duplo: ")
-        posicaoAtual = float(input()) 
+        posicaoAtual = int(input()) 
 
         if posicaoAtual > comprimento:
             print("Posição inválida. Insira uma posição menor ou igual ao comprimento da barra.")
@@ -128,7 +129,7 @@ def simulador():
         moduloAtual = float(input())
 
         print("Insira a posição do ponto de aplicação da força a ser adicionada: ")
-        posicaoAtual = float(input())
+        posicaoAtual = int(input())
 
         if posicaoAtual != 0 and posicaoAtual != comprimento:
             print("Posição inválida. Uma força horizontal deve ser aplicada no começo ou no final da barra")
@@ -155,7 +156,7 @@ def simulador():
         moduloAtual = float(input())
 
         print("Insira a posição horizontal do ponto de aplicação da força a ser adicionada: ")
-        posicaoAtual = float(input())
+        posicaoAtual = int(input())
 
         if posicaoAtual > comprimento:
             print("Posição inválida. Insira uma posição menor ou igual ao comprimento da barra.")
@@ -216,40 +217,36 @@ def simulador():
     
     matrizForcas = matrizForcasPlot(modForcasX, modForcasY, momentos, apoios)
     matrizPosicoes = matrizPosPlot(comprimento, posForcasX, posForcasY, momentos, apoios)
-
     plot(comprimento, matrizForcas, matrizPosicoes)
+
+    os.system("diagramas.pgm")
+    os._exit(0)
 
 def matrizForcasPlot(forcasX, forcasY, momentos, apoios):
 
     matrizForcas = []
     if(len(forcasX) != 0):
-        fx = np.zeros((1, len(forcasX)))
+        fx = np.zeros(len(forcasX))
         for i in range(len(forcasX)):
-            fx[0][i] = forcasX[i]
+            fx[i] = forcasX[i]
     else:
-        fx = np.zeros((1,1))
+        fx = np.zeros(1)
 
     if(len(forcasY) != 0):
-        fy = np.zeros((1, len(forcasY)))
+        fy = np.zeros(len(forcasY))
         for i in range(len(forcasY)):
-            fy[0][i] = forcasY[i]
+            fy[i] = forcasY[i]
     else:
-        fy = np.zeros((1, 1))
+        fy = np.zeros(1)
 
-    mom = np.zeros((1,1))
-    mom[0][0] = sum(momentos)
-
-    if(len(apoios) != 0):
-        apoio = np.zeros((1, len(apoios)))
-        for i in range(len(apoios)):
-            apoio[0][i] = apoios[i][0]
-    else:
-        apoio = np.zeros((1,1))
+    mom = np.zeros(1)
+    mom[0] = sum(momentos)
+    
         
     matrizForcas.append(fx)
     matrizForcas.append(fy)
     matrizForcas.append(mom)
-    matrizForcas.append(apoio)
+    matrizForcas.append(apoios)
 
     return matrizForcas
 
@@ -258,28 +255,28 @@ def matrizPosPlot(barra, posicoesX, posicoesY, momentos, apoios):
 
     matrizPosicoes = []
     if(len(posicoesX) != 0):
-        px = np.zeros((1, len(posicoesX)))
+        px = np.zeros(len(posicoesX), dtype = int)
         for i in range(len(posicoesX)):
-            px[0][i] = posicoesX[i]
+            px[i] = posicoesX[i]
     else:
-        px = np.zeros((1,1))
+        px = np.zeros(1, dtype = int)
 
     if(len(posicoesY) != 0):
-        py = np.zeros((1, len(posicoesY)))
+        py = np.zeros(len(posicoesY), dtype = int)
         for i in range(len(posicoesY)):
-            py[0][i] = posicoesY[i]
+            py[i] = posicoesY[i]
     else:
-        py = np.zeros((1, 1))
+        py = np.zeros(1, dtype = int)
 
-    mom = np.zeros((1,1))
-    mom[0][0] = barra
+    mom = np.zeros(1, dtype = int)
+    mom[0] = barra
+    apoio = []
+    for i in range(len(apoios)):
+        posApoio = []
+        for j in range (len(apoios[i])):
+            posApoio.append(apoios[i][j])
+        apoio.append(posApoio)
 
-    if(len(apoios) != 0):
-        apoio = np.zeros((1, len(apoios)))
-        for i in range(len(apoios)):
-            apoio[0][i] = apoios[i][0]
-    else:
-        apoio = np.zeros((1,1))
         
     matrizPosicoes.append(px)
     matrizPosicoes.append(py)
