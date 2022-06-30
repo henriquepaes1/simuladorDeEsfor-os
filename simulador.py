@@ -8,13 +8,16 @@ def simulador():
     apoios = []
     engastes, simples, duplos = [], [], []
 
+    momentos = []
+    reacoesEngastes, reacoesSimples, reacoesDuplos = [], [], []
+
     # Configuração da barra
     print("Bem-vindo ao simulador de esforços!\nInsira o comprimento da sua barra (metros):")
-    comprimento = int(input())
+    comprimento = float(input())
 
     while(comprimento <= 0):
         print("O comprimento da barra deve ser maior que 0")
-        comprimento = int(input())
+        comprimento = float(input())
 
     print("\nComprimento de " + str(comprimento) + " metros configurado com sucesso!\n")
     print("-------------------------------------------------\n")
@@ -25,9 +28,9 @@ def simulador():
 
     while continua == 'sim':
         print("Insira posição horizontal do engaste: ")
-        posicaoAtual = int(input()) 
+        posicaoAtual = float(input()) 
 
-        if posicaoAtual < comprimento or posicaoAtual > 0:
+        if posicaoAtual != 0 and posicaoAtual != comprimento:
             print("Posição inválida. Um engaste deve ser posicionado no início ou no final da barra.")
 
         elif posicaoAtual < 0:
@@ -50,7 +53,7 @@ def simulador():
 
     while continua == 'sim':
         print("Insira posição horizontal do apoio simples: ")
-        posicaoAtual = int(input()) 
+        posicaoAtual = float(input()) 
 
         if posicaoAtual > comprimento:
             print("Posição inválida. Insira uma posição menor ou igual ao comprimento da barra.")
@@ -75,7 +78,7 @@ def simulador():
 
     while continua == 'sim':
         print("Insira posição horizontal do apoio duplo: ")
-        posicaoAtual = int(input()) 
+        posicaoAtual = float(input()) 
 
         if posicaoAtual > comprimento:
             print("Posição inválida. Insira uma posição menor ou igual ao comprimento da barra.")
@@ -105,19 +108,19 @@ def simulador():
 
     while continua == 'sim':
         print("Insira o módulo da força horizontal a ser adicionada: ")
-        moduloAtual = int(input())
+        moduloAtual = float(input())
 
         print("Insira a posição do ponto de aplicação da força a ser adicionada: ")
-        posicaoAtual = int(input())
+        posicaoAtual = float(input())
 
-        if posicaoAtual > 0 or posicaoAtual < comprimento:
+        if posicaoAtual != 0 and posicaoAtual != comprimento:
             print("Posição inválida. Uma força horizontal deve ser aplicada no começo ou no final da barra")
             print("A força não foi adicionada.\n")
         else:
             posForcasX.append(posicaoAtual)
             modForcasX.append(moduloAtual)
 
-        print("Deseja aplicar mais forças na drieção vertical? (sim/nao)")
+        print("Deseja aplicar mais forças na direção horizontal? (sim/nao)")
         continua = input()
 
     if len(modForcasX) != 0:
@@ -132,10 +135,10 @@ def simulador():
 
     while continua == 'sim':
         print("Insira o módulo da força vertical a ser adicionada: ")
-        moduloAtual = int(input())
+        moduloAtual = float(input())
 
         print("Insira a posição horizontal do ponto de aplicação da força a ser adicionada: ")
-        posicaoAtual = int(input())
+        posicaoAtual = float(input())
 
         if posicaoAtual > comprimento:
             print("Posição inválida. Insira uma posição menor ou igual ao comprimento da barra.")
@@ -149,7 +152,7 @@ def simulador():
             posForcasY.append(posicaoAtual)
             modForcasY.append(moduloAtual)
 
-        print("Deseja aplicar mais forças na drieção vertical? (sim/nao)")
+        print("Deseja aplicar mais forças na direção vertical? (sim/nao)")
         continua = input()
 
     if len(modForcasY) != 0:
@@ -165,4 +168,31 @@ def simulador():
     posForcas.append(posForcasX)
     posForcas.append(posForcasY)
 
+    # Resultante das forças
+    resForcasY = sum(modForcasY)
+    resForcasX = sum(modForcasX)
+
+    
+    # 1 apoio simples e 1 apoio duplo
+    if (len(engastes) == 0 and  len(simples) == 1 and len(duplos) == 1):
+        if (len(modForcasX) != 0):
+            reacoesDuplos.append(-sum(modForcasX))
+        for i in range(len(modForcasY)):
+            momentos.append(modForcasY[i] * (posForcasY[i] - simples[0]))
+        reacoesDuplos.append(- sum(momentos) / (duplos[0] - simples[0]))
+        reacoesSimples.append(- sum(modForcasY) - reacoesDuplos[1])
+        print("reacoes apoio duplo: " + str(reacoesDuplos) + "\n" + "reacoes apoio simples: " + str(reacoesSimples))
+    
+    # 1 engaste
+    if (len(engastes) == 1 and  len(simples) == 0 and len(duplos) == 0):
+        for i in range(len(modForcasY)):
+            momentos.append(modForcasY[i] * (posForcasY[i] - engastes[0]))
+        if (len(modForcasX) != 0):
+            reacoesEngastes.append(- sum(modForcasX))
+        reacoesEngastes.append(- sum(modForcasY))
+        reacoesEngastes.append(- sum(momentos))
+        print("reacoes engaste: " + str(reacoesEngastes))
+
 simulador()
+
+
