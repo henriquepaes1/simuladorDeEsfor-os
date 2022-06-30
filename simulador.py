@@ -192,7 +192,20 @@ def simulador():
         reacoesEngastes.append(- sum(modForcasY))
         reacoesEngastes.append(- sum(momentos))
         print("reacoes engaste: " + str(reacoesEngastes))
+    
+    matrizInicial(modForcasX, modForcasY, momentos, apois)
+
+
+
+def matrizInicial(forcasX, forcasY, momentos, apoios):
+    fx = np.zeros(1, len(forcasX))
+
+    print(fx)
+
 
 simulador()
+
+
+
 
 

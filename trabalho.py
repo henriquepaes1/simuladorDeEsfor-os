@@ -671,76 +671,6 @@ def soma(vetor):
 		soma += x 
 	return soma
 
-def calculaReacoes(forcas, apoios, posicao):
-	if forcas[0] != [0]:
-		forcasX= forcas[0]
-	else:
-		forcasX = 0
-	
-	if forcas[1] != [0]:
-		forcasY = forcas[1]
-	else:
-		forcasY = 0
-
-	if forcas[2] != [0]:
-		momentos = forcas[2]
-	else:	
-		momentos = 0
-
-
-	if apoios[0] != [0]:
-		apoiosSimples = apoios[0]
-	else:
-		apoiosSimples = 0
-	
-	if apoios[1] != [0]:
-		apoiosDuplo = apoios[1]
-	else:
-		apoiosDuplo = 0
-
-	if apoios[2] != [0]:
-		engastes = apoios[2]
-	else:	
-		engastes = 0
-
-	qtdVary, qtdVarx, qtdVarM = 0, 0, 0
-	if engastes != 0:
-		qtdVary += len(engastes)
-		qtdVarx += len(engastes)
-		qtdVarM += len(engastes)
-	if apoiosDuplo != 0:
-		qtdVary += len(apoiosDuplo)
-		qtdVarx += len(apoiosDuplo)
-
-	if apoiosSimples != 0:
-		qtdVary += len(apoiosSimples)
-
-
-	resultX = -1*soma(forcasX)
-	resultM = -1*soma(momentos)
-	resultY = -1*soma(forcasY)
-
-	if qtdVary != 1:
-
-		apoiosY = np.zeros((1,qtdVary))
-
-		apoiosMomentos = np.zeros((1,qtdVary))
-		for i in range (qtdVary):
-			apoiosMomentos[0][i] = posicao[3][i]
-			apoiosY[0][i] = 1
-		coefs = np.zeros((2, qtdVary))
-		coefs[0], coefs[1] = apoiosY, apoiosMomentos
-		results = np.zeros((2, qtdVary))
-		results[0], results[1] = resultY, resultM
-
-		print(coefs)
-
-		Y = np.dot(np.linalg.inv(coefs), results)
-
-		return resultX, Y, resultM
-
-	return resultX, resultY, resultM
-
 def plot(compBarra, forcas, posicao):
 	n = 100*compBarra
 
@@ -764,7 +694,6 @@ def plot(compBarra, forcas, posicao):
 	apoios = [[1],[1],[0]]
 	posiApoios = [3, 4, 0]
 	posicao.append(posiApoios)
-	fx, fy, fm = calculaReacoes(forcas, apoios, posicao)
 	forcas[0].append(fx)
 	posicao[0].append(posicao[3][1])
 
@@ -827,6 +756,5 @@ def main():
 	plot(tamanhoBarra, forcas, posicao)
 	os.system("diagramas.pgm")
 	os._exit(0)
-
 
 main()
