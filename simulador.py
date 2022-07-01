@@ -15,6 +15,8 @@ def simulador():
     momentos = []
     reacoesEngastes, reacoesSimples, reacoesDuplos = [], [], []
 
+    reacoesApoios = []
+
     zero = []
 
     # Configuração da barra
@@ -186,11 +188,6 @@ def simulador():
     posForcas.append(posForcasX)
     posForcas.append(posForcasY)
 
-    # Resultante das forças
-    resForcasY = sum(modForcasY)
-    resForcasX = sum(modForcasX)
-
-    
     # 1 apoio simples e 1 apoio duplo
     if (len(engastes) == 0 and  len(simples) == 1 and len(duplos) == 1):
         if (len(modForcasX) != 0):
@@ -200,7 +197,10 @@ def simulador():
         for i in range(len(modForcasY)):
             momentos.append(modForcasY[i] * (posForcasY[i] - simples[0]))
         reacoesDuplos.append(- sum(momentos) / (duplos[0] - simples[0]))
-        reacoesSimples.append(- sum(modForcasY) - reacoesDuplos[1])
+        reacoesDuplos.append(0.0)
+        reacoesSimples.extend([0.0, - sum(modForcasY) - reacoesDuplos[1], 0.0])
+        reacoesApoios.append(reacoesSimples)
+        reacoesApoios.append(reacoesDuplos)
         print("reacoes apoio duplo: " + str(reacoesDuplos) + "\n" + "reacoes apoio simples: " + str(reacoesSimples))
     
     # 1 engaste
@@ -213,11 +213,14 @@ def simulador():
             reacoesEngastes.append(0.0)
         reacoesEngastes.append(- sum(modForcasY))
         reacoesEngastes.append(- sum(momentos))
+        reacoesApoios.append(reacoesEngastes)
         print("reacoes engaste: " + str(reacoesEngastes))
     
     matrizForcas = matrizForcasPlot(modForcasX, modForcasY, momentos, apoios)
     matrizPosicoes = matrizPosPlot(comprimento, posForcasX, posForcasY, momentos, apoios)
-    plot(comprimento, matrizForcas, matrizPosicoes)
+    matrizSolucao = calculaMatrizSolucao(reacoesApoios, apoios)
+    
+    plot(comprimento, matrizForcas, matrizPosicoes, matrizSolucao)
 
     os.system("diagramas.pgm")
     os._exit(0)
@@ -284,6 +287,23 @@ def matrizPosPlot(barra, posicoesX, posicoesY, momentos, apoios):
     matrizPosicoes.append(apoio)
 
     return matrizPosicoes
+
+def calculaMatrizSolucao(reacoesApoios, apoios):
+    matrizSolucaoFinal = []
+    apoio = []
+
+    for i in reacoesApoios:
+        matrizSolucaoFinal.append(i)
+
+    for i in range(len(apoios)):
+        posApoio = []
+        for j in range (len(apoios[i])):
+            posApoio.append(apoios[i][j])
+        apoio.append(posApoio)
+
+    matrizSolucaoFinal.append(apoio)
+
+    return matrizSolucaoFinal
 
 simulador()
 
