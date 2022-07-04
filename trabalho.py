@@ -38,6 +38,8 @@ def plotForcaY(forcas, grafico, posicao, compBarra, indice):
 			plotNumeros('v', posicao[i], compBarra, grafico, 0, posicaox, imagem)
 			plotNumeros(int(ind[1]), posicao[i], compBarra, grafico, 1, posicaox, imagem)
 			return grafico
+		elif forcas[i] == 0:
+			return grafico
 
 		elif forcas[i] < 0:
 			posicaox = 0
@@ -113,93 +115,95 @@ def plotMomento(forcas, grafico, posicao, compBarra, indice):
 
 	for k in range(len(forcas)):
 		if posicao[k] == 0:
-			grafico[imagem*compBarra-3][25*compBarra-16] = 255
-			grafico[imagem*compBarra-2][25*compBarra-16] = 255
-			grafico[imagem*compBarra-1][25*compBarra-16] = 255
-			grafico[imagem*compBarra][25*compBarra-16] = 255
-			grafico[imagem*compBarra+1][25*compBarra-16] = 255
-			grafico[imagem*compBarra+2][25*compBarra-16] = 255
-			grafico[imagem*compBarra+3][25*compBarra-16] = 255
+			grafico[imagem*compBarra-3][25*compBarra-16-10] = 255
+			grafico[imagem*compBarra-2][25*compBarra-16-10] = 255
+			grafico[imagem*compBarra-1][25*compBarra-16-10] = 255
+			grafico[imagem*compBarra][25*compBarra-16-10] = 255
+			grafico[imagem*compBarra+1][25*compBarra-16-10] = 255
+			grafico[imagem*compBarra+2][25*compBarra-16-10] = 255
+			grafico[imagem*compBarra+3][25*compBarra-16-10] = 255
 
-			grafico[imagem*compBarra-5][25*compBarra-14] = 255
-			grafico[imagem*compBarra+5][25*compBarra-14] = 255
-			grafico[imagem*compBarra-4][25*compBarra-15] = 255
-			grafico[imagem*compBarra+4][25*compBarra-15] = 255
+			grafico[imagem*compBarra-5][25*compBarra-14-10] = 255
+			grafico[imagem*compBarra+5][25*compBarra-14-10] = 255
+			grafico[imagem*compBarra-4][25*compBarra-15-10] = 255
+			grafico[imagem*compBarra+4][25*compBarra-15-10] = 255
 
-			grafico[imagem*compBarra-6][25*compBarra-13] = 255
-			grafico[imagem*compBarra-6][25*compBarra-12] = 255
-			grafico[imagem*compBarra-6][25*compBarra-11] = 255
-			grafico[imagem*compBarra-6][25*compBarra-10] = 255
-			grafico[imagem*compBarra-6][25*compBarra+1-10] = 255
-			grafico[imagem*compBarra-6][25*compBarra+2-10] = 255
-			grafico[imagem*compBarra-6][25*compBarra+3-10] = 255
+			grafico[imagem*compBarra-6][25*compBarra-13-10] = 255
+			grafico[imagem*compBarra-6][25*compBarra-12-10] = 255
+			grafico[imagem*compBarra-6][25*compBarra-11-10] = 255
+			grafico[imagem*compBarra-6][25*compBarra-10-10] = 255
+			grafico[imagem*compBarra-6][25*compBarra+1-10-10] = 255
+			grafico[imagem*compBarra-6][25*compBarra+2-10-10] = 255
+			grafico[imagem*compBarra-6][25*compBarra+3-10-10] = 255
 
-			grafico[imagem*compBarra+6][25*compBarra-3-10] = 255
-			grafico[imagem*compBarra+6][25*compBarra-2-10] = 255
-			grafico[imagem*compBarra+6][25*compBarra-1-10] = 255
-			grafico[imagem*compBarra+6][25*compBarra-10] = 255
-			grafico[imagem*compBarra+6][25*compBarra+1-10] = 255
-			grafico[imagem*compBarra+6][25*compBarra+2-10] = 255
-			grafico[imagem*compBarra+6][25*compBarra+3-10] = 255
+			grafico[imagem*compBarra+6][25*compBarra-3-10-10] = 255
+			grafico[imagem*compBarra+6][25*compBarra-2-10-10] = 255
+			grafico[imagem*compBarra+6][25*compBarra-1-10-10] = 255
+			grafico[imagem*compBarra+6][25*compBarra-10-10] = 255
+			grafico[imagem*compBarra+6][25*compBarra+1-10-10] = 255
+			grafico[imagem*compBarra+6][25*compBarra+2-10-10] = 255
+			grafico[imagem*compBarra+6][25*compBarra+3-10-10] = 255
 
 
 			if type(forcas[k]) == str:
-				grafico[imagem*compBarra-8][25*compBarra+2-10] = 255
-				grafico[imagem*compBarra-7][25*compBarra+3-10] = 255
-				grafico[imagem*compBarra-6][25*compBarra+4-10] = 255
-				grafico[imagem*compBarra-5][25*compBarra+3-10] = 255
-				grafico[imagem*compBarra-4][25*compBarra+2-10] = 255
+				grafico[imagem*compBarra-8][25*compBarra+2-20] = 255
+				grafico[imagem*compBarra-7][25*compBarra+3-20] = 255
+				grafico[imagem*compBarra-6][25*compBarra+4-20] = 255
+				grafico[imagem*compBarra-5][25*compBarra+3-20] = 255
+				grafico[imagem*compBarra-4][25*compBarra+2-20] = 255
 				
 				ind = forcas[k].split()
-				plotNumeros('m', posicao[k], compBarra, grafico, -6, 0, imagem)
-				plotNumeros(int(ind[1]), posicao[k], compBarra, grafico, -4, 0, imagem)
+				plotNumeros('m', posicao[k], compBarra, grafico, -6, -3, imagem)
+				plotNumeros(int(ind[1]), posicao[k], compBarra, grafico, -4, -3, imagem)
 
+				return grafico
+			elif forcas[k] == 0:
 				return grafico
 
 			elif forcas[k] < 0:
-				grafico[imagem*compBarra+4][25*compBarra+2-10] = 255
-				grafico[imagem*compBarra+5][25*compBarra+3-10] = 255
-				grafico[imagem*compBarra+6][25*compBarra+4-10] = 255
-				grafico[imagem*compBarra+7][25*compBarra+3-10] = 255
-				grafico[imagem*compBarra+8][25*compBarra+2-10] = 255
+				grafico[imagem*compBarra+4][25*compBarra+2-10-10] = 255
+				grafico[imagem*compBarra+5][25*compBarra+3-10-10] = 255
+				grafico[imagem*compBarra+6][25*compBarra+4-10-10] = 255
+				grafico[imagem*compBarra+7][25*compBarra+3-10-10] = 255
+				grafico[imagem*compBarra+8][25*compBarra+2-10-10] = 255
 				forcas[k] *= -1
 
 			else:
-				grafico[imagem*compBarra-8][25*compBarra+2-10] = 255
-				grafico[imagem*compBarra-7][25*compBarra+3-10] = 255
-				grafico[imagem*compBarra-6][25*compBarra+4-10] = 255
-				grafico[imagem*compBarra-5][25*compBarra+3-10] = 255
-				grafico[imagem*compBarra-4][25*compBarra+2-10] = 255
+				grafico[imagem*compBarra-8][25*compBarra+2-10-10] = 255
+				grafico[imagem*compBarra-7][25*compBarra+3-10-10] = 255
+				grafico[imagem*compBarra-6][25*compBarra+4-10-10] = 255
+				grafico[imagem*compBarra-5][25*compBarra+3-10-10] = 255
+				grafico[imagem*compBarra-4][25*compBarra+2-10-10] = 255
 				
 		else:
-			grafico[imagem*compBarra-3][75*compBarra+6+25] = 255
-			grafico[imagem*compBarra-2][75*compBarra+6+25] = 255
-			grafico[imagem*compBarra-1][75*compBarra+6+25] = 255
-			grafico[imagem*compBarra][75*compBarra+6+25] = 255
-			grafico[imagem*compBarra+1][75*compBarra+6+25] = 255
-			grafico[imagem*compBarra+2][75*compBarra+6+25] = 255
-			grafico[imagem*compBarra+3][75*compBarra+6+25] = 255
+			grafico[imagem*compBarra-3][75*compBarra+6+25-10] = 255
+			grafico[imagem*compBarra-2][75*compBarra+6+25-10] = 255
+			grafico[imagem*compBarra-1][75*compBarra+6+25-10] = 255
+			grafico[imagem*compBarra][75*compBarra+6+25-10] = 255
+			grafico[imagem*compBarra+1][75*compBarra+6+25-10] = 255
+			grafico[imagem*compBarra+2][75*compBarra+6+25-10] = 255
+			grafico[imagem*compBarra+3][75*compBarra+6+25-10] = 255
 
-			grafico[imagem*compBarra-5][75*compBarra+4+25] = 255
-			grafico[imagem*compBarra-4][75*compBarra+5+25] = 255
-			grafico[imagem*compBarra+5][75*compBarra+4+25] = 255
-			grafico[imagem*compBarra+4][75*compBarra+5+25] = 255
+			grafico[imagem*compBarra-5][75*compBarra+4+25-10] = 255
+			grafico[imagem*compBarra-4][75*compBarra+5+25-10] = 255
+			grafico[imagem*compBarra+5][75*compBarra+4+25-10] = 255
+			grafico[imagem*compBarra+4][75*compBarra+5+25-10] = 255
 
-			grafico[imagem*compBarra-6][75*compBarra-3+25] = 255
-			grafico[imagem*compBarra-6][75*compBarra-2+25] = 255
-			grafico[imagem*compBarra-6][75*compBarra-1+25] = 255
-			grafico[imagem*compBarra-6][75*compBarra+25] = 255
-			grafico[imagem*compBarra-6][75*compBarra+1+25] = 255
-			grafico[imagem*compBarra-6][75*compBarra+2+25] = 255
-			grafico[imagem*compBarra-6][75*compBarra+3+25] = 255
+			grafico[imagem*compBarra-6][75*compBarra-3+25-10] = 255
+			grafico[imagem*compBarra-6][75*compBarra-2+25-10] = 255
+			grafico[imagem*compBarra-6][75*compBarra-1+25-10] = 255
+			grafico[imagem*compBarra-6][75*compBarra+25-10] = 255
+			grafico[imagem*compBarra-6][75*compBarra+1+25-10] = 255
+			grafico[imagem*compBarra-6][75*compBarra+2+25-10] = 255
+			grafico[imagem*compBarra-6][75*compBarra+3+25-10] = 255
 
-			grafico[imagem*compBarra+6][75*compBarra-3+25] = 255
-			grafico[imagem*compBarra+6][75*compBarra-2+25] = 255
-			grafico[imagem*compBarra+6][75*compBarra-1+25] = 255
-			grafico[imagem*compBarra+6][75*compBarra+25] = 255
-			grafico[imagem*compBarra+6][75*compBarra+1+25] = 255
-			grafico[imagem*compBarra+6][75*compBarra+2+25] = 255
-			grafico[imagem*compBarra+6][75*compBarra+3+25] = 255
+			grafico[imagem*compBarra+6][75*compBarra-3+25-10] = 255
+			grafico[imagem*compBarra+6][75*compBarra-2+25-10] = 255
+			grafico[imagem*compBarra+6][75*compBarra-1+25-10] = 255
+			grafico[imagem*compBarra+6][75*compBarra+25-10] = 255
+			grafico[imagem*compBarra+6][75*compBarra+1+25-10] = 255
+			grafico[imagem*compBarra+6][75*compBarra+2+25-10] = 255
+			grafico[imagem*compBarra+6][75*compBarra+3+25-10] = 255
 
 			if type(forcas[k]) == str:
 				grafico[imagem*compBarra-8][75*compBarra-2+25] = 255
@@ -213,21 +217,22 @@ def plotMomento(forcas, grafico, posicao, compBarra, indice):
 				plotNumeros(int(ind[1]), posicao[k], compBarra, grafico, 4, 0, imagem)
 
 				return grafico
-
+			elif forcas[k] == 0:
+				return grafico
 			elif forcas[k] < 0:
-				grafico[imagem*compBarra+4][75*compBarra-2+25] = 255
-				grafico[imagem*compBarra+5][75*compBarra-3+25] = 255
-				grafico[imagem*compBarra+6][75*compBarra-4+25] = 255
-				grafico[imagem*compBarra+7][75*compBarra-3+25] = 255
-				grafico[imagem*compBarra+8][75*compBarra-2+25] = 255
+				grafico[imagem*compBarra+4][75*compBarra-2+25-10] = 255
+				grafico[imagem*compBarra+5][75*compBarra-3+25-10] = 255
+				grafico[imagem*compBarra+6][75*compBarra-4+25-10] = 255
+				grafico[imagem*compBarra+7][75*compBarra-3+25-10] = 255
+				grafico[imagem*compBarra+8][75*compBarra-2+25-10] = 255
 				forcas[k] *= -1
 
 			else:
-				grafico[imagem*compBarra-8][75*compBarra-2+25] = 255
-				grafico[imagem*compBarra-7][75*compBarra-3+25] = 255
-				grafico[imagem*compBarra-6][75*compBarra-4+25] = 255
-				grafico[imagem*compBarra-5][75*compBarra-3+25] = 255
-				grafico[imagem*compBarra-4][75*compBarra-2+25] = 255
+				grafico[imagem*compBarra-8][75*compBarra-2+25-10] = 255
+				grafico[imagem*compBarra-7][75*compBarra-3+25-10] = 255
+				grafico[imagem*compBarra-6][75*compBarra-4+25-10] = 255
+				grafico[imagem*compBarra-5][75*compBarra-3+25-10] = 255
+				grafico[imagem*compBarra-4][75*compBarra-2+25-10] = 255
 
 		forcaDecomposta = []
 		while forcas[k] != 0:
@@ -235,10 +240,16 @@ def plotMomento(forcas, grafico, posicao, compBarra, indice):
 			forcas[k] = (forcas[k] - numero)// 10
 			forcaDecomposta.insert(0, numero)
 		for j in range(0, len(forcaDecomposta)):
-			plotNumeros(forcaDecomposta[j], posicao[k], compBarra, grafico, j+1, 0, imagem)
-			if j == len(forcaDecomposta)-1:
-				plotNumeros('n', posicao[k], compBarra, grafico, j+2, 0, imagem)
-				plotNumeros('m', posicao[k], compBarra, grafico, j+2, 0, imagem)
+			if posicao[k] == 0:
+				plotNumeros(forcaDecomposta[j], posicao[k], compBarra, grafico, j-6, -8, imagem)
+				if j == len(forcaDecomposta)-1:
+					plotNumeros('n', posicao[k], compBarra, grafico, j-5, -8, imagem)
+					plotNumeros('m', posicao[k], compBarra, grafico, j-5, -8, imagem)
+			else:
+				plotNumeros(forcaDecomposta[j], posicao[k], compBarra, grafico, j-9, -8, imagem)
+				if j == len(forcaDecomposta)-1:
+					plotNumeros('n', posicao[k], compBarra, grafico, j+2, -8, imagem)
+					plotNumeros('m', posicao[k], compBarra, grafico, j+2, -8, imagem)
 	return grafico
 
 	
@@ -419,15 +430,14 @@ def plotForcaX(forcas, grafico, posicao, compBarra, indice):
 		imagem = 80
 	for i in range(0, len(forcas)):
 		if posicao[i] == 0:
-			grafico[imagem*compBarra][25*compBarra-1] = 255
-			grafico[imagem*compBarra][25*compBarra-2] = 255	
-			grafico[imagem*compBarra][25*compBarra-3] = 255
-			grafico[imagem*compBarra][25*compBarra-4] = 255
-			grafico[imagem*compBarra][25*compBarra-5] = 255	
-			grafico[imagem*compBarra][25*compBarra-6] = 255
-			grafico[imagem*compBarra][25*compBarra-7] = 255
-
 			if type(forcas[i]) == str:
+				grafico[imagem*compBarra][25*compBarra-1] = 255
+				grafico[imagem*compBarra][25*compBarra-2] = 255	
+				grafico[imagem*compBarra][25*compBarra-3] = 255
+				grafico[imagem*compBarra][25*compBarra-4] = 255
+				grafico[imagem*compBarra][25*compBarra-5] = 255	
+				grafico[imagem*compBarra][25*compBarra-6] = 255
+				grafico[imagem*compBarra][25*compBarra-7] = 255
 
 				grafico[imagem*compBarra-1][25*compBarra-2] = 255
 				grafico[imagem*compBarra+1][25*compBarra-2] = 255
@@ -439,29 +449,47 @@ def plotForcaX(forcas, grafico, posicao, compBarra, indice):
 				plotNumeros(int(ind[1]), posicao[i], compBarra, grafico, 0, 15, imagem)
 
 				return grafico
+			elif forcas[i] == 0.0:
+				return grafico
 
 			elif forcas[i] < 0:
-				grafico[imagem*compBarra-1][25*compBarra] = 255
-				grafico[imagem*compBarra-2][25*compBarra+1] = 255
-				grafico[imagem*compBarra+1][25*compBarra] = 255
-				grafico[imagem*compBarra+2][25*compBarra+1] = 255
 				grafico[imagem*compBarra][25*compBarra-1] = 255
+				grafico[imagem*compBarra][25*compBarra-2] = 255	
+				grafico[imagem*compBarra][25*compBarra-3] = 255
+				grafico[imagem*compBarra][25*compBarra-4] = 255
+				grafico[imagem*compBarra][25*compBarra-5] = 255	
+				grafico[imagem*compBarra][25*compBarra-6] = 255
+				grafico[imagem*compBarra][25*compBarra-7] = 255
+				
+				grafico[imagem*compBarra-1][25*compBarra-8] = 255
+				grafico[imagem*compBarra-2][25*compBarra-6] = 255
+				grafico[imagem*compBarra+1][25*compBarra-7] = 255
+				grafico[imagem*compBarra+2][25*compBarra-6] = 255
+				grafico[imagem*compBarra][25*compBarra-8] = 255
 				forcas[i] *= -1
-			else: 
+			else:
+				grafico[imagem*compBarra][25*compBarra-1] = 255
+				grafico[imagem*compBarra][25*compBarra-2] = 255	
+				grafico[imagem*compBarra][25*compBarra-3] = 255
+				grafico[imagem*compBarra][25*compBarra-4] = 255
+				grafico[imagem*compBarra][25*compBarra-5] = 255	
+				grafico[imagem*compBarra][25*compBarra-6] = 255
+				grafico[imagem*compBarra][25*compBarra-7] = 255 
+
 				grafico[imagem*compBarra-1][25*compBarra-2] = 255
 				grafico[imagem*compBarra+1][25*compBarra-2] = 255
 				grafico[imagem*compBarra-2][25*compBarra-3] = 255
 				grafico[imagem*compBarra+2][25*compBarra-3] = 255
 		else:
-			grafico[imagem*compBarra][75*compBarra] = 255
-			grafico[imagem*compBarra][75*compBarra+1] = 255	
-			grafico[imagem*compBarra][75*compBarra+2] = 255
-			grafico[imagem*compBarra][75*compBarra+3] = 255
-			grafico[imagem*compBarra][75*compBarra+4] = 255	
-			grafico[imagem*compBarra][75*compBarra+5] = 255
-			grafico[imagem*compBarra][75*compBarra+6] = 255
-
 			if type(forcas[i]) == str:
+				grafico[imagem*compBarra][75*compBarra] = 255
+				grafico[imagem*compBarra][75*compBarra+1] = 255	
+				grafico[imagem*compBarra][75*compBarra+2] = 255
+				grafico[imagem*compBarra][75*compBarra+3] = 255
+				grafico[imagem*compBarra][75*compBarra+4] = 255	
+				grafico[imagem*compBarra][75*compBarra+5] = 255
+				grafico[imagem*compBarra][75*compBarra+6] = 255
+
 				grafico[imagem*compBarra-1][75*compBarra+6] = 255
 				grafico[imagem*compBarra-2][75*compBarra+5] = 255
 				grafico[imagem*compBarra+1][75*compBarra+6] = 255
@@ -473,8 +501,18 @@ def plotForcaX(forcas, grafico, posicao, compBarra, indice):
 				plotNumeros(int(ind[1]), posicao[i], compBarra, grafico, 0, 15, imagem)
 
 				return grafico
-				
+			elif forcas[i] == 0:
+				return grafico
+
 			elif forcas[i] < 0:
+				grafico[imagem*compBarra][75*compBarra] = 255
+				grafico[imagem*compBarra][75*compBarra+1] = 255	
+				grafico[imagem*compBarra][75*compBarra+2] = 255
+				grafico[imagem*compBarra][75*compBarra+3] = 255
+				grafico[imagem*compBarra][75*compBarra+4] = 255	
+				grafico[imagem*compBarra][75*compBarra+5] = 255
+				grafico[imagem*compBarra][75*compBarra+6] = 255
+
 				grafico[imagem*compBarra-1][75*compBarra] = 255
 				grafico[imagem*compBarra-2][75*compBarra+1] = 255
 				grafico[imagem*compBarra+1][75*compBarra] = 255
@@ -483,6 +521,14 @@ def plotForcaX(forcas, grafico, posicao, compBarra, indice):
 				forcas[i] *= -1
 
 			else: 
+				grafico[imagem*compBarra][75*compBarra] = 255
+				grafico[imagem*compBarra][75*compBarra+1] = 255	
+				grafico[imagem*compBarra][75*compBarra+2] = 255
+				grafico[imagem*compBarra][75*compBarra+3] = 255
+				grafico[imagem*compBarra][75*compBarra+4] = 255	
+				grafico[imagem*compBarra][75*compBarra+5] = 255
+				grafico[imagem*compBarra][75*compBarra+6] = 255
+
 				grafico[imagem*compBarra-1][75*compBarra+6] = 255
 				grafico[imagem*compBarra-2][75*compBarra+5] = 255
 				grafico[imagem*compBarra+1][75*compBarra+6] = 255
@@ -495,9 +541,9 @@ def plotForcaX(forcas, grafico, posicao, compBarra, indice):
 			forcas[i] = (forcas[i] - numero)// 10
 			forcaDecomposta.insert(0, int(numero))
 		for j in range(0, len(forcaDecomposta)):
-			plotNumeros(forcaDecomposta[j], posicao[i], compBarra, grafico, j-1, 0, imagem)
+			plotNumeros(forcaDecomposta[j], posicao[i], compBarra, grafico, j-1, 15, imagem)
 			if j == len(forcaDecomposta)-1:
-				plotNumeros('n', posicao[i], compBarra, grafico, j, 0, imagem)
+				plotNumeros('n', posicao[i], compBarra, grafico, j, 15, imagem)
 
 	return grafico
 
@@ -573,7 +619,7 @@ def plotNumeros(num, posicao, compBarra, grafico, qtd, posicaox, imagem):
 		grafico[imagem*compBarra-6+posicaox][25*compBarra + 50*posicao+5+7*qtd+3] = 255
 		grafico[imagem*compBarra-6+posicaox][25*compBarra + 50*posicao+1+7*qtd+3] = 255
 
-		grafico[imagem*compBarra-5+posicaox][25*compBarra + 5050*posicao+4+7*qtd+3] = 255
+		grafico[imagem*compBarra-5+posicaox][25*compBarra + 50*posicao+4+7*qtd+3] = 255
 		grafico[imagem*compBarra-5+posicaox][25*compBarra + 50*posicao+3+7*qtd+3] = 255
 		grafico[imagem*compBarra-5+posicaox][25*compBarra + 50*posicao+2+7*qtd+3] = 255
 	elif num == 4:
@@ -804,12 +850,9 @@ def plotNumeros(num, posicao, compBarra, grafico, qtd, posicaox, imagem):
 		grafico[imagem*compBarra-6+posicaox][25*compBarra + 50*posicao+3+7*qtd+3] = 255
 		grafico[imagem*compBarra-5+posicaox][25*compBarra + 50*posicao+3+7*qtd+3] = 255
 
-
-
-
 	return grafico
 
-def plot(compBarra, forcas, posicao, solucao):
+def plot(compBarra, forcas, posicao, solucao, posicaoSol):
 	n = 100*compBarra
 
 	plotGrafico = open('diagramas.pgm', 'w')
@@ -859,15 +902,13 @@ def plot(compBarra, forcas, posicao, solucao):
 			grafico = plotEngaste(grafico, forcas[3][2][i], compBarra, 1)
 			
 	########################################################################
-
-	if (len(solucao[0]) == 1 and solucao[0][0] != 0) or len(solucao[0]) != 1:
-		grafico = plotForcaX(solucao[0], grafico, posicao[0], compBarra, 3)
+	grafico = plotForcaX(solucao[0], grafico, posicaoSol[0], compBarra, 3)
 
 	if (len(solucao[1]) == 1 and solucao[1][0] != 0) or len(solucao[1]) != 1:
-		grafico = plotForcaY(solucao[1], grafico, posicao[1], compBarra, 3)
+		grafico = plotForcaY(solucao[1], grafico, posicaoSol[1], compBarra, 3)
 
 	if (len(solucao[2]) == 1 and solucao[2][0] != 0) or len(solucao[2]) != 1:
-		grafico = plotMomento(solucao[2], grafico, posicao[2], compBarra, 3)
+		grafico = plotMomento(solucao[2], grafico, posicaoSol[2], compBarra, 3)
 
 	########################################################################
 	
@@ -884,14 +925,15 @@ def plot(compBarra, forcas, posicao, solucao):
 	if len(forcas[3][0]) != 0:
 		for i in range (len(forcas[3][0])):
 			grafico = plotForcaY(["v "+str(i+1)], grafico, forcas[3][0], compBarra, 2)	
-
+	j = len(forcas[3][0])
 	if len(forcas[3][1]) != 0:
-		for i in range (len(forcas[3][1])):
+		for i in range (j, j+len(forcas[3][1])):
 			grafico = plotForcaY(["v "+str(i+1)], grafico, forcas[3][1], compBarra, 2)	
 			grafico = plotForcaX(["h "+str(i+1)], grafico, forcas[3][1], compBarra, 2)		
-
+	
+	j += len(forcas[3][1])
 	if len(forcas[3][2]) != 0:
-		for i in range (len(forcas[3][2])):
+		for i in range (j, j+len(forcas[3][2])):
 			grafico = plotForcaX(["h "+str(i+1)], grafico, forcas[3][2], compBarra, 2)
 			grafico = plotForcaY(["v "+str(i+1)], grafico, forcas[3][2], compBarra, 2)
 			grafico = plotMomento(["m "+str(i+1)], grafico, forcas[3][2], compBarra, 2)

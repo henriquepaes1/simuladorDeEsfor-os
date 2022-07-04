@@ -1,6 +1,7 @@
 import os
 import numpy as np
 from trabalho import plot
+import copy
 
 def simulador():
     modForcas = []
@@ -212,15 +213,16 @@ def simulador():
         else:
             reacoesEngastes.append(0.0)
         reacoesEngastes.append(- sum(modForcasY))
-        reacoesEngastes.append(- sum(momentos))
+        reacoesEngastes.append(sum(momentos))
         reacoesApoios.append(reacoesEngastes)
         print("reacoes engaste: " + str(reacoesEngastes))
     
     matrizForcas = matrizForcasPlot(modForcasX, modForcasY, momentos, apoios)
     matrizPosicoes = matrizPosPlot(comprimento, posForcasX, posForcasY, momentos, apoios)
-    matrizSolucao = calculaMatrizSolucao(reacoesApoios, apoios)
+    matrizSolucao, matrizSolucaoPos = calculaMatrizSolucao(reacoesApoios, apoios, matrizForcas, matrizPosicoes)
     
-    plot(comprimento, matrizForcas, matrizPosicoes, matrizSolucao)
+    matrizForcas[2] = [0]
+    plot(comprimento, matrizForcas, matrizPosicoes, matrizSolucao, matrizSolucaoPos)
 
     os.system("diagramas.pgm")
     os._exit(0)
@@ -288,22 +290,45 @@ def matrizPosPlot(barra, posicoesX, posicoesY, momentos, apoios):
 
     return matrizPosicoes
 
-def calculaMatrizSolucao(reacoesApoios, apoios):
+def calculaMatrizSolucao(reacoesApoios, apoios, matrizForcas, matrizPosicoes):
     matrizSolucaoFinal = []
-    apoio = []
+    matrizPosicoesFinal = []
+    for i in range(len(matrizForcas)-2):
+        linha=[]
+        for j in range(len(matrizForcas[i])):
+            linha.append((matrizForcas[i][j]))
+        matrizSolucaoFinal.append(linha)
+    linha = []
+    matrizSolucaoFinal.append(linha)
 
-    for i in reacoesApoios:
-        matrizSolucaoFinal.append(i)
+    for i in range(len(matrizPosicoes)-2):
+        linha=[]
+        for j in range(len(matrizPosicoes[i])):
+            linha.append((matrizPosicoes[i][j]))
+        matrizPosicoesFinal.append(linha)
+    linha = []
+    matrizPosicoesFinal.append(linha)
 
-    for i in range(len(apoios)):
-        posApoio = []
-        for j in range (len(apoios[i])):
-            posApoio.append(apoios[i][j])
-        apoio.append(posApoio)
 
-    matrizSolucaoFinal.append(apoio)
+    if len(reacoesApoios) == 1:
+        matrizSolucaoFinal[0].append((reacoesApoios[0][0]))
+        matrizSolucaoFinal[1].append((reacoesApoios[0][1]))
+        matrizSolucaoFinal[2].append((reacoesApoios[0][2]))
 
-    return matrizSolucaoFinal
+        matrizPosicoesFinal[0].append((apoios[2][0]))
+        matrizPosicoesFinal[1].append((apoios[2][0]))
+        matrizPosicoesFinal[2].append((apoios[2][0]))
+    else:
+        matrizSolucaoFinal[1].append((reacoesApoios[0][1]))
+        matrizSolucaoFinal[0].append((reacoesApoios[1][0]))
+        matrizSolucaoFinal[1].append((reacoesApoios[1][1]))
+
+        matrizPosicoesFinal[1].append((apoios[0][0]))
+        matrizPosicoesFinal[0].append((apoios[1][0]))
+        matrizPosicoesFinal[1].append((apoios[1][0]))
+
+
+    return matrizSolucaoFinal, matrizPosicoesFinal
 
 simulador()
 
