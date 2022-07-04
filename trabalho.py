@@ -890,11 +890,11 @@ def plot(compBarra, forcas, posicao, solucao, posicaoSol):
 		grafico = plotMomento(forcas[2], grafico, posicao[2], compBarra, 1)
 
 	if len(forcas[3][0]) != 0:
-		for i in range (len(forcas[3][0])):
+		for i in range (len(forcas[3][1])):
 			grafico = plotApoioSimples(grafico, forcas[3][0][i], compBarra, 1)
 
 	if len(forcas[3][1]) != 0:
-		for i in range (len(forcas[3][1])):
+		for i in range (len(forcas[3][0])):
 			grafico = plotApoioDuplo(grafico, forcas[3][1][i], compBarra, 1)
 
 	if len(forcas[3][2]) != 0:
